@@ -31,7 +31,10 @@ npm install --save-dev html-webpack-plugin webpack webpack-dev-server babel-{cor
 ##### ......some more things.......
 and now I have a functioning React page saying Hello World!
 
-#####
+
+
+### this.props children and React Router
+
 
 #####
 
