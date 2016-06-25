@@ -31,7 +31,7 @@ const sphere8Position = new THREE.Vector3(8.5 + 10, 90, 200);
 const sphere9Position = new THREE.Vector3(7 + 10, 85, 200);
 const sphere10Position = new THREE.Vector3(5.5 + 10, 80, 200);
 
-const letterKPosition = new THREE.Vector3(17, 90, 200);
+// const letterKPosition = new THREE.Vector3(17, 90, 200);
 
 // const sphere11Position = new THREE.Vector3(0, 0, 150);
 // const sphere12Position = new THREE.Vector3(0, 0, 150);

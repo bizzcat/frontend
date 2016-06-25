@@ -73,30 +73,3 @@ ReactDOM.render(
   <ProfilesContainer users={users_list} />,
   document.getElementById('profiles')
 )
-
-
-
-var WooHoo = React.createClass({
-  render: function() {
-    var listItems = [];
-
-    for (var i = 1; i < 10; i++) {
-      let myStyle = {
-        fontSize: i * i + 'px',
-      }
-      listItems.push(<p key={i} style={myStyle}> Wooohooo {i} </p>);
-    }
-
-    return (
-      <div>
-      {listItems}
-        Hello
-      </div>
-    )
-  }
-});
-
-ReactDOM.render(
-  <WooHoo />,
-  document.getElementById('woohoo')
-);
