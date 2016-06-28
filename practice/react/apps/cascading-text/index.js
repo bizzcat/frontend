@@ -1,5 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var _ = require('lodash');
+
 
 var WooHoo = React.createClass({
   render: function() {
