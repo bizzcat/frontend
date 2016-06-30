@@ -1,6 +1,6 @@
 #Notes on workflow
 
-Four use in production mode:
+For use in production mode:
 Go to webpack configuration and set the module.exports entry item to the folder name of the app you would like to run
 
 module.exports = {
@@ -44,7 +44,7 @@ and now I have a functioning React page saying Hello World!
 
 ##### Set up my first React Router framework
 
-##### 
+#####
 
 #####
 

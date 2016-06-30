@@ -10,8 +10,7 @@ var Home = require('../components/Home');
 
 var routes = (
   <Router history={hashHistory}>
-    <Route path='/' component={Main}>
-      <Route path='/home' component={Home} />
+    <Route path='/session' component={Session}>
     </Route>
   </Router>
 );
