@@ -40,12 +40,11 @@ npm install --save-dev html-webpack-plugin webpack webpack-dev-server babel-{cor
 ##### ......some more things.......
 and now I have a functioning React page saying Hello World!
 
+##### Created a page with fake cascading profiles under apps/fake-profiles
 
+##### Set up my first React Router framework
 
-### this.props children and React Router
-
-
-#####
+##### 
 
 #####
 
