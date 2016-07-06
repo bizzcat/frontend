@@ -160,79 +160,13 @@
 // });
 
 
-var sessionTimes = {
-  "startTime": "9:00am",
-  "endTime": "3:00pm",
-}
-
-var commands = [
-  {
-    "timeStamp": "9:30am",
-    "commandName": "Start Reading",
-    "commandType": "read",
-    "createdBy": 1,
-    "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
-  },
-  {
-    "timeStamp": "11:30am",
-    "commandName": "Make America great again!",
-    "commandType": "america",
-    "createdBy": 4,
-    "sentTo": [7, 8],
-  },
-  {
-    "timeStamp": "1:15pm",
-    "commandName": "Go play outside",
-    "commandType": "play",
-    "createdBy": 2,
-    "sentTo": [1, 2, 3, 4, 5],
-  },
-  {
-    "timeStamp": "2:10pm",
-    "commandName": "Save the gorillas!",
-    "commandType": "science",
-    "createdBy": 3,
-    "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
-  },
-]
-
-
-var students = [
-  {"name": "Billy", "id": 1},
-  {"name": "Sally", "id": 2},
-  {"name": "Sid", "id": 3},
-  {"name": "Squid", "id": 4},
-  {"name": "Kyle", "id": 5},
-  {"name": "Lyle", "id": 6},
-  {"name": "Dopey", "id": 7},
-  {"name": "Mopey", "id": 8}
-]
-
-var teachers = [
-  { "name": "Mr. Adams", "id": 1 },
-  { "name": "Mrs. Jefferson", "id": 2 },
-  { "name": "Mrs. Goodall", "id": 3 },
-  { "name": "Mr. Trump", "id": 4 },
-]
-
-var session = {
-  sessionTimes,
-  commands,
-  students,
-  teachers
-}
-
 
 // ***********************************************************************
 
 var React = require('react');
+var _ = require('lodash');
+// var session1Data = require('session1-data');
 
-// **getCommandTimeStamp**
-// **getCommandName**
-// **getFontAwesomeFromCommandType**
-// **getTeacherNameFromID**
-// **getStudentNamesFromID**
-// **assignTooltip**
 
 // {
 //   "timeStamp": "9:30am",
@@ -244,37 +178,162 @@ var React = require('react');
 
 var Command = React.createClass({
 
+  getTimeStamp: function() {
+    return this.props.command.timeStamp;
+  },
+
+  getFontAwesomeFromCommandType: function() {
+    if (this.props.command.commandType === "read") { return <i class='fa fa-book'></i>};
+    if (this.props.command.commandType === "play") { return <i class='fa fa-soccer-ball-o'></i>};
+    if (this.props.command.commandType === "science") { return <i class='fa fa-medkit'></i>};
+    if (this.props.command.commandType === "america") { return <i class='fa fa-resistance'></i>};
+  },
+
+  getCommandName: function() {
+    return this.props.command.commandName;
+  },
+
+  getTeacherNameFromID: function() {
+    // The `_.matchesProperty` iteratee shorthand.
+    // _.find(users, ['active', false]);
+    var createdByID = this.props.command.createdBy;
+    var teacherObject = _.find(this.props.teachers, ['id', createdByID]);
+    var teacherName = teacherObject.name;
+
+    return teacherName;
+  },
+
+  getStudentNamesFromID: function() {
+    var sentToList = this.props.command.sentTo;
+    var studentList = this.props.students;
+    var sentToNames = [];
+
+    _(sentToList).forEach(function(sentToID) {
+      _(studentList).forEach(function(studentObject) {
+        if (studentObject.id === sentToID) {
+          sentToNames.push(studentObject.name)
+        };
+      });
+    });
+    console.log(sentToNames);
+
+    var namesBelowSix = [];
+    var namesAboveSix = [];
+
+    for (var index in sentToNames) {
+      if (index < 6) {
+        namesBelowSix.push(sentToNames[index]);
+      }
+      else if (index >= 6) {
+        namesAboveSix.push(sentToNames[index]);
+      }
+    }
+
+    if (studentList.length < 6) {
+      var studentNamesString = namesBelowSix.join(', ');
+    }
+    else if (studentList.length > 6) {
+      var namesBelowSixString = namesBelowSix.join(', ');
+      var namesAboveSixString = namesAboveSix.join(', ');
+      var namesAboveSixLengthString = <p class='above-six-length'> (and {namesAboveSix.length} more) </p>;
+      var namesAboveSixNameString = <p class='above-six'> {namesAboveSixString} </p>;
+
+      var studentNamesString = [namesBelowSixString, namesAboveSixLengthString, namesAboveSixNameString];
+    }
+
+    return <p class='student-names-string'> {studentNamesString} </p>;
+  },
+
+
+  assignTooltip: function() {
+    return;
+  },
+
+  // **ON CLICK OF ABOVE-SIX-LENGTH, SET ABOVE-SIX CLASS TO DISPLAY**
+
 
   render: function() {
     return (
-      <div>
-        TimeStamp!
-        {this.props.command.timeStamp}
-      </div>
+      <section>
+        <span class='command-time-span'> timestamp {this.getTimeStamp()} </span>
+        <span class='icon-span'> iconspan {this.getFontAwesomeFromCommandType()} </span>
+        <p class='command-name'> commandname {this.getCommandName()} </p>
+        <p class='teacher-name'> teachername {this.getTeacherNameFromID()} </p>
+        <p> {this.getStudentNamesFromID()} </p>
+      </section>
     )
   }
 });
 
 
-
-
 var Session = React.createClass({
 
-
-  // **cycle Through Commands**
-
-
   render: function() {
+    var sessionTimes = {
+      "startTime": "9:00am",
+      "endTime": "3:00pm",
+    };
+
+    var commands = [
+      {
+        "timeStamp": "9:30am",
+        "commandName": "Start Reading",
+        "commandType": "read",
+        "createdBy": 1,
+        "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
+      },
+      {
+        "timeStamp": "11:30am",
+        "commandName": "Make America great again!",
+        "commandType": "america",
+        "createdBy": 4,
+        "sentTo": [7, 8],
+      },
+      {
+        "timeStamp": "1:15pm",
+        "commandName": "Go play outside",
+        "commandType": "play",
+        "createdBy": 2,
+        "sentTo": [1, 2, 3, 4, 5],
+      },
+      {
+        "timeStamp": "2:10pm",
+        "commandName": "Save the gorillas!",
+        "commandType": "science",
+        "createdBy": 3,
+        "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
+      },
+    ];
+
+
+    var students = [
+      {"name": "Billy", "id": 1},
+      {"name": "Sally", "id": 2},
+      {"name": "Sid", "id": 3},
+      {"name": "Squid", "id": 4},
+      {"name": "Kyle", "id": 5},
+      {"name": "Lyle", "id": 6},
+      {"name": "Dopey", "id": 7},
+      {"name": "Mopey", "id": 8}
+    ];
+
+    var teachers = [
+      { "name": "Mr. Adams", "id": 1 },
+      { "name": "Mrs. Jefferson", "id": 2 },
+      { "name": "Mrs. Goodall", "id": 3 },
+      { "name": "Mr. Trump", "id": 4 },
+    ];
+
+    var sessionData = {
+      sessionTimes,
+      commands,
+      students,
+      teachers
+    };
+
     return (
       <div>
-        Session!!!
-        <Command command={{
-          "timeStamp": "9:30am",
-          "commandName": "Start Reading",
-          "commandType": "read",
-          "createdBy": 1,
-          "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
-        }} />
+        <Command command={sessionData.commands[0]} students={sessionData.students} teachers={sessionData.teachers}/>
       </div>
     )
   }

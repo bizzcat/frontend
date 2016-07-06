@@ -7,11 +7,11 @@ var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
 // var Main = require('../components/Main');
 // var Home = require('../components/Home');
-var Session = require('../components/session1')
+var Session = require('../components/session1');
 
 var routes = (
   <Router history={hashHistory}>
-    <Route path='/session' component={Session}>
+    <Route path='/session1' component={Session}>
     </Route>
   </Router>
 );
