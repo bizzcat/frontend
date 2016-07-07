@@ -165,28 +165,15 @@
 
 var React = require('react');
 var _ = require('lodash');
+var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
+var Popover = require('react-bootstrap/lib/Popover');
 // var session1Data = require('session1-data');
 
-
-// {
-//   "timeStamp": "9:30am",
-//   "commandName": "Start Reading",
-//   "commandType": "read",
-//   "createdBy": 1,
-//   "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
-// },
 
 var Command = React.createClass({
 
   getTimeStamp: function() {
     return this.props.command.timeStamp;
-  },
-
-  getFontAwesomeFromCommandType: function() {
-    if (this.props.command.commandType === "read") { return <i class='fa fa-book'></i>};
-    if (this.props.command.commandType === "play") { return <i class='fa fa-soccer-ball-o'></i>};
-    if (this.props.command.commandType === "science") { return <i class='fa fa-medkit'></i>};
-    if (this.props.command.commandType === "america") { return <i class='fa fa-resistance'></i>};
   },
 
   getCommandName: function() {
@@ -215,7 +202,6 @@ var Command = React.createClass({
         };
       });
     });
-    console.log(sentToNames);
 
     var namesBelowSix = [];
     var namesAboveSix = [];
@@ -235,18 +221,77 @@ var Command = React.createClass({
     else if (studentList.length > 6) {
       var namesBelowSixString = namesBelowSix.join(', ');
       var namesAboveSixString = namesAboveSix.join(', ');
-      var namesAboveSixLengthString = <p class='above-six-length'> (and {namesAboveSix.length} more) </p>;
-      var namesAboveSixNameString = <p class='above-six'> {namesAboveSixString} </p>;
+      function meow() {console.log('meow')};
+      var namesAboveSixLengthString = <p key="1" class='above-six-length' onclick={meow()}> (and {namesAboveSix.length} more) </p>;
+      var namesAboveSixNameString = <p key="2" class='above-six' style={{display: 'none'}}> {namesAboveSixString} </p>;
 
-      var studentNamesString = [namesBelowSixString, namesAboveSixLengthString, namesAboveSixNameString];
+      var studentNamesStrings = [namesBelowSixString, namesAboveSixLengthString, namesAboveSixNameString];
     }
 
-    return <p class='student-names-string'> {studentNamesString} </p>;
+    return studentNamesStrings;
   },
 
 
-  assignTooltip: function() {
-    return;
+  // getTooltip: function() {
+  //   var teacherName = <p class='teacher-name'> {this.getTeacherNameFromID()} </p>
+  //   var studentNames = "<p class='student-names'>" + this.getStudentNamesFromID() + "</p>"
+  //   var tooltipContent = [teacherName, studentNames];
+  //   return tooltipContent;
+  // },
+
+  getPopoverContent: function() {
+    var teacherName = <p class='teacher-name'> {this.getTeacherNameFromID()} </p>
+    var studentNames = <section class='student-names'> {this.getStudentNamesFromID()} </section>
+    var popoverContent = [teacherName, studentNames];
+    return popoverContent;
+  },
+//
+//   const popoverInstance = (
+//   <div style={{ height: 120 }}>
+//     <Popover placement="right" positionLeft={200} positionTop={50} title="Popover right">
+//       And here's some <strong>amazing</strong> content. It's very engaging. right?
+//     </Popover>
+//   </div>
+//   <ButtonToolbar>
+//     <OverlayTrigger trigger="click" placement="left" overlay={<Popover title="Popover left"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+//       <Button bsStyle="default">Holy guacamole!</Button>
+//     </OverlayTrigger>
+//     <OverlayTrigger trigger="click" placement="top" overlay={<Popover title="Popover top"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+//       <Button bsStyle="default">Holy guacamole!</Button>
+//     </OverlayTrigger>
+//     <OverlayTrigger trigger="click" placement="bottom" overlay={<Popover title="Popover bottom"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+//       <Button bsStyle="default">Holy guacamole!</Button>
+//     </OverlayTrigger>
+//     <OverlayTrigger trigger="click" placement="right" overlay={<Popover title="Popover right"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+//       <Button bsStyle="default">Holy guacamole!</Button>
+//     </OverlayTrigger>
+//   </ButtonToolbar>
+// );
+
+
+  getFontAwesomeFromCommandType: function() {
+    // var toolTip = this.getTooltip();
+    // console.log(toolTip)
+    if (this.props.command.commandType === "read") { var fontAwesomeIcon = <i class='fa fa-book'>meow</i>};
+    if (this.props.command.commandType === "play") { var fontAwesomeIcon = <i class='fa fa-soccer-ball-o'>meow</i>};
+    if (this.props.command.commandType === "science") { var fontAwesomeIcon = <i class='fa fa-medkit'>meow</i>};
+    if (this.props.command.commandType === "america") { var fontAwesomeIcon = <i class='fa fa-resistance'>meow</i>};
+
+    // var fontAwesomeIconn = <span data-toggle="popover" data-placement="right" title={this.getCommandName()} data-content={toolTip} html="true"> {fontAwesomeIcon} </span>;
+    //
+    return fontAwesomeIcon;
+  },
+
+  assignPopover: function() {
+    var fontAwesomeIcon = this.getFontAwesomeFromCommandType();
+    var popoverContent = this.getPopoverContent();
+    var commandName = this.props.command.commandName;
+
+    return (
+      <OverlayTrigger trigger="click" placement="right" overlay={<Popover title={commandName}>{popoverContent}</Popover>}>
+        {fontAwesomeIcon}
+      </OverlayTrigger>
+    )
   },
 
   // **ON CLICK OF ABOVE-SIX-LENGTH, SET ABOVE-SIX CLASS TO DISPLAY**
@@ -255,11 +300,8 @@ var Command = React.createClass({
   render: function() {
     return (
       <section>
-        <span class='command-time-span'> timestamp {this.getTimeStamp()} </span>
-        <span class='icon-span'> iconspan {this.getFontAwesomeFromCommandType()} </span>
-        <p class='command-name'> commandname {this.getCommandName()} </p>
-        <p class='teacher-name'> teachername {this.getTeacherNameFromID()} </p>
-        <p> {this.getStudentNamesFromID()} </p>
+        <span class='command-time-span'> {this.getTimeStamp()} </span>
+        {this.assignPopover()}
       </section>
     )
   }
@@ -331,6 +373,7 @@ var Session = React.createClass({
       teachers
     };
 
+
     return (
       <div>
         <Command command={sessionData.commands[0]} students={sessionData.students} teachers={sessionData.teachers}/>
@@ -339,7 +382,9 @@ var Session = React.createClass({
   }
 });
 
-
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
 // ReactDOM.render(
 //   <Session />,
 //   document.getElementById('session-1')
