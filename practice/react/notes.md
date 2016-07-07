@@ -10,7 +10,6 @@ module.exports = {
 ...
 }
 
-
 ### Setup
 
 
@@ -44,7 +43,8 @@ and now I have a functioning React page saying Hello World!
 
 ##### Set up my first React Router framework
 
-#####
+##### TODO:
+get the (and X more) item to be clickable
 
 #####
 

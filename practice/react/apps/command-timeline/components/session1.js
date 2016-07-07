@@ -221,8 +221,7 @@ var Command = React.createClass({
     else if (studentList.length > 6) {
       var namesBelowSixString = namesBelowSix.join(', ');
       var namesAboveSixString = namesAboveSix.join(', ');
-      function meow() {console.log('meow')};
-      var namesAboveSixLengthString = <p key="1" class='above-six-length' onclick={meow()}> (and {namesAboveSix.length} more) </p>;
+      var namesAboveSixLengthString = <p key="1" class='above-six-length' onclick={function() {console.log('meow');}}> (and {namesAboveSix.length} more) </p>;
       var namesAboveSixNameString = <p key="2" class='above-six' style={{display: 'none'}}> {namesAboveSixString} </p>;
 
       var studentNamesStrings = [namesBelowSixString, namesAboveSixLengthString, namesAboveSixNameString];
@@ -243,6 +242,9 @@ var Command = React.createClass({
     var teacherName = <p class='teacher-name'> {this.getTeacherNameFromID()} </p>
     var studentNames = <section class='student-names'> {this.getStudentNamesFromID()} </section>
     var popoverContent = [teacherName, studentNames];
+    // React.renderComponentToString(teacherName);
+    console.log(popoverContent);
+
     return popoverContent;
   },
 //
@@ -288,7 +290,7 @@ var Command = React.createClass({
     var commandName = this.props.command.commandName;
 
     return (
-      <OverlayTrigger trigger="click" placement="right" overlay={<Popover title={commandName}>{popoverContent}</Popover>}>
+      <OverlayTrigger trigger="click" placement="right" overlay={<Popover id={commandName} title={commandName}>{popoverContent}</Popover>}>
         {fontAwesomeIcon}
       </OverlayTrigger>
     )
@@ -303,6 +305,20 @@ var Command = React.createClass({
         <span class='command-time-span'> {this.getTimeStamp()} </span>
         {this.assignPopover()}
       </section>
+      // <section>
+      // <span class='command-time-span'> time stamp </span>
+        // <OverlayTrigger>
+        // <i class='fa fa-book'> fontAwesomeIcon </i>
+        //     title = porps.commandname
+        //     content =
+        //         <p> teacher name </p>
+        //         <section>
+        //             student names below six
+        //             <p> above six </p>
+        //             <p> above six names </p>
+        //         </section>
+        // </OverlayTrigger>
+      // </section>
     )
   }
 });
