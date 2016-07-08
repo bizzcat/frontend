@@ -1,173 +1,9 @@
-// 'use strict';
-//
-// // hand setting data
-//
-//
-// function prependSessionEnd(session) {
-//   var endTime = "<p>" + session["endTime"] + "</p>";
-//   var endSeshText = '<p> Class session ended </p>';
-//   var endSeshImg = "<p class='end'></p>";
-//   var sessionEnd = $('<section></section>');
-//
-//   sessionEnd.append( endTime )
-//     .append( endSeshImg )
-//     .append( endSeshText);
-//
-//   prependBuffer()
-//   $('#session-1').prepend( sessionEnd );
-// }
-//
-// function appendSessionStart(session) {
-//   var startTime = "<p>" + session["startTime"] + "</p>";
-//   var startSeshText = '<p> Class session started </p>';
-//   var startSeshImg = "<p class='start'></p>";
-//   var sessionStart = $('<section></section>');
-//
-//   sessionStart.append( startTime )
-//     .append( startSeshImg )
-//     .append( startSeshText );
-//
-//   $('#session-1').append(sessionStart);
-// }
-//
-// function prependBuffer() {
-//   $('#session-1').prepend("<section class='buffer'></section>");
-// }
-//
-// function getTeacherLine(teachers, command) {
-//   for (var index in teachers) {
-//     var teacher = teachers[index]
-//     var teacherID = teacher["id"]
-//     var teacherName = teacher["name"]
-//     if (teacherID === command["createdBy"]) {
-//       return "Sent by " + teacherName;
-//     }
-//   }
-// }
-//
-// function getStudentList(students, commandStudentIDs) {
-//   var studentList = []
-//   for (var index1 in students) {
-//     var student1 = students[index1];
-//     var studentID1 = student1["id"]
-//
-//     for (var index2 in commandStudentIDs) {
-//       var studentID2 = commandStudentIDs[index2];
-//
-//       if (studentID1 === studentID2) {
-//         studentList.push(student1["name"])
-//       }
-//     }
-//   }
-//   return studentList
-// }
-//
-//
-//
-// function getStudentNamesString(studentList) {
-//   var namesBelowSix = [];
-//   var namesAboveSix = [];
-//
-//   for (var index in studentList) {
-//     if (index < 6) {
-//       namesBelowSix.push(studentList[index]);
-//     }
-//     else if (index >= 6) {
-//       namesAboveSix.push(studentList[index]);
-//     }
-//   }
-//
-//   if (studentList.length < 6) {
-//     var studentNamesString = namesBelowSix.join(', ');
-//   }
-//   else if (studentList.length > 6) {
-//     var namesBelowSixString = namesBelowSix.join(', ');
-//     var namesAboveSixString = namesAboveSix.join(', ');
-//     var namesAboveSixTempString = "<h6 class='above-six-length'>(and " + namesAboveSix.length + " more) </h6> <h6 class='above-six' style='display: none;'> " + namesAboveSixString + "</h6>";
-//
-//     var studentNamesString = [namesBelowSixString, namesAboveSixTempString].join(', ');
-//     }
-//
-//   return "<h6>" + studentNamesString + "</h6>";
-// }
-//
-// function getCommandToolTip(command, students, teachers) {
-//   var commandStudentIDs = command["sentTo"];
-//   var studentList = getStudentList(students, commandStudentIDs);
-//   var studentNamesString = getStudentNamesString(studentList);
-//
-//   var commandName = '<h4>' + command["commandName"] + '</h4>';
-//   var teacherName = '<h6>' + getTeacherLine(teachers, command) + '</h6>';
-//   var sentToLine = "<h5> SENT TO " + studentList.length + " STUDENTS </h5>";
-//
-//   var commandToolTip = [commandName, teacherName, sentToLine, studentNamesString].join('')
-//
-//   return commandToolTip
-//   }
-//
-// function getFontAwesomeIcon(commandType) {
-//   if (commandType === "read") { return $('<p></p>').append("<i class='fa fa-book'></i> ")};       // read play science america
-//   if (commandType === "play") { return $('<p></p>').append("<i class='fa fa-soccer-ball-o'></i> ")};
-//   if (commandType === "science") { return $('<p></p>').append("<i class='fa fa-medkit'></i> ")};
-//   if (commandType === "america") { return $('<p></p>').append("<i class='fa fa-resistance'></i> ")};
-// }
-//
-// function getFullCommandSection(command, commandToolTip) {
-//   var commandTime = $('<p></p>').append(command["timeStamp"]);
-//   var commandTeacherID = command["createdBy"];
-//   var commandStudentIDs = command["sentTo"];
-//   var fontAwesomeIcon = getFontAwesomeIcon(command["commandType"]);
-//
-//   fontAwesomeIcon.tooltip({title: commandToolTip, html: true, trigger: "none", placement: "right", padding: 0});
-//   fontAwesomeIcon.click( function() {
-//
-//     $('.tooltip').not(this).tooltip("hide");
-//     $(this).tooltip("show");
-//
-//     $('.above-six-length').on('click', function() {
-//       $('.above-six').css('display', 'inline');
-//       $(this).remove();
-//     });
-//   })
-//
-//   var commandSection = $('<section></section>')
-//   commandSection.append(commandTime)
-//     .append(fontAwesomeIcon)
-//
-//   return commandSection
-// }
-//
-// function postCommand(commandSection) {
-//   prependBuffer();
-//   $('#session-1').prepend(commandSection);
-// }
-//
-// function layoutCommands(session, commands, students, teachers) {
-//   for (var index in commands) {
-//     var command = commands[index];
-//     var commandToolTip = getCommandToolTip(command, students, teachers);
-//     var commandSection = getFullCommandSection(command, commandToolTip)
-//     postCommand(commandSection);
-//   }
-//   prependSessionEnd(session);
-//   appendSessionStart(session);
-// }
-//
-//
-// $(document).ready(function(){
-//     layoutCommands(session, commands, students, teachers);
-//     $('[data-toggle="tooltip"]').tooltip();
-// });
-
-
-
-// ***********************************************************************
+'use strict';
 
 var React = require('react');
 var _ = require('lodash');
 var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
 var Popover = require('react-bootstrap/lib/Popover');
-// var session1Data = require('session1-data');
 
 
 var Command = React.createClass({
@@ -176,19 +12,18 @@ var Command = React.createClass({
     return this.props.command.timeStamp;
   },
 
+
   getCommandName: function() {
     return this.props.command.commandName;
   },
 
+
   getTeacherNameFromID: function() {
-    // The `_.matchesProperty` iteratee shorthand.
-    // _.find(users, ['active', false]);
     var createdByID = this.props.command.createdBy;
     var teacherObject = _.find(this.props.teachers, ['id', createdByID]);
-    var teacherName = teacherObject.name;
-
-    return teacherName;
+    return teacherObject.name;
   },
+
 
   getStudentNamesFromID: function() {
     var sentToList = this.props.command.sentTo;
@@ -196,135 +31,87 @@ var Command = React.createClass({
     var sentToNames = [];
 
     _(sentToList).forEach(function(sentToID) {
-      _(studentList).forEach(function(studentObject) {
-        if (studentObject.id === sentToID) {
-          sentToNames.push(studentObject.name)
-        };
-      });
+      var studentObject = _.find(studentList, ['id', sentToID]);
+      sentToNames.push(studentObject.name);
     });
 
-    var namesBelowSix = [];
-    var namesAboveSix = [];
+    var studentNamesString = sentToNames.join(', ');
 
-    for (var index in sentToNames) {
-      if (index < 6) {
-        namesBelowSix.push(sentToNames[index]);
-      }
-      else if (index >= 6) {
-        namesAboveSix.push(sentToNames[index]);
-      }
-    }
+    // var namesBelowSix = [];
+    // var namesAboveSix = [];
+    //
+    // for (var index in sentToNames) {
+    //   if (index < 6) {
+    //     namesBelowSix.push(sentToNames[index]);
+    //   }
+    //   else if (index >= 6) {
+    //     namesAboveSix.push(sentToNames[index]);
+    //   }
+    // }
+    //
+    // if (studentList.length < 6) {
+    //   var studentNamesString = namesBelowSix.join(', ');
+    // }
+    // else if (studentList.length > 6) {
+    //   var namesBelowSixString = namesBelowSix.join(', ');
+    //   var namesAboveSixString = namesAboveSix.join(', ');
+    //   var namesAboveSixLengthString = <p key="1" className='above-six-length' onclick={function() {console.log('meow');}}> (and {namesAboveSix.length} more) </p>;
+    //   var namesAboveSixNameString = <p key="2" className='above-six' style={{display: 'none'}}> {namesAboveSixString} </p>;
+    //
+    //   var studentNamesStrings = [namesBelowSixString, namesAboveSixLengthString, namesAboveSixNameString];
+    // }
 
-    if (studentList.length < 6) {
-      var studentNamesString = namesBelowSix.join(', ');
-    }
-    else if (studentList.length > 6) {
-      var namesBelowSixString = namesBelowSix.join(', ');
-      var namesAboveSixString = namesAboveSix.join(', ');
-      var namesAboveSixLengthString = <p key="1" class='above-six-length' onclick={function() {console.log('meow');}}> (and {namesAboveSix.length} more) </p>;
-      var namesAboveSixNameString = <p key="2" class='above-six' style={{display: 'none'}}> {namesAboveSixString} </p>;
-
-      var studentNamesStrings = [namesBelowSixString, namesAboveSixLengthString, namesAboveSixNameString];
-    }
-
-    return studentNamesStrings;
+    return studentNamesString;
   },
 
 
-  // getTooltip: function() {
-  //   var teacherName = <p class='teacher-name'> {this.getTeacherNameFromID()} </p>
-  //   var studentNames = "<p class='student-names'>" + this.getStudentNamesFromID() + "</p>"
-  //   var tooltipContent = [teacherName, studentNames];
-  //   return tooltipContent;
-  // },
-
   getPopoverContent: function() {
-    var teacherName = <p class='teacher-name'> {this.getTeacherNameFromID()} </p>
-    var studentNames = <section class='student-names'> {this.getStudentNamesFromID()} </section>
+    var teacherName = <p className='teacher-name' key={this.props.command.commandName + 'teachername'}> {this.getTeacherNameFromID()} </p>
+    var studentNames = <p className='student-names'key={this.props.command.commandName + 'studentnames'}> {this.getStudentNamesFromID()} </p>
     var popoverContent = [teacherName, studentNames];
-    // React.renderComponentToString(teacherName);
-    console.log(popoverContent);
 
     return popoverContent;
   },
-//
-//   const popoverInstance = (
-//   <div style={{ height: 120 }}>
-//     <Popover placement="right" positionLeft={200} positionTop={50} title="Popover right">
-//       And here's some <strong>amazing</strong> content. It's very engaging. right?
-//     </Popover>
-//   </div>
-//   <ButtonToolbar>
-//     <OverlayTrigger trigger="click" placement="left" overlay={<Popover title="Popover left"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
-//       <Button bsStyle="default">Holy guacamole!</Button>
-//     </OverlayTrigger>
-//     <OverlayTrigger trigger="click" placement="top" overlay={<Popover title="Popover top"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
-//       <Button bsStyle="default">Holy guacamole!</Button>
-//     </OverlayTrigger>
-//     <OverlayTrigger trigger="click" placement="bottom" overlay={<Popover title="Popover bottom"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
-//       <Button bsStyle="default">Holy guacamole!</Button>
-//     </OverlayTrigger>
-//     <OverlayTrigger trigger="click" placement="right" overlay={<Popover title="Popover right"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
-//       <Button bsStyle="default">Holy guacamole!</Button>
-//     </OverlayTrigger>
-//   </ButtonToolbar>
-// );
 
 
   getFontAwesomeFromCommandType: function() {
-    // var toolTip = this.getTooltip();
-    // console.log(toolTip)
-    if (this.props.command.commandType === "read") { var fontAwesomeIcon = <i class='fa fa-book'>meow</i>};
-    if (this.props.command.commandType === "play") { var fontAwesomeIcon = <i class='fa fa-soccer-ball-o'>meow</i>};
-    if (this.props.command.commandType === "science") { var fontAwesomeIcon = <i class='fa fa-medkit'>meow</i>};
-    if (this.props.command.commandType === "america") { var fontAwesomeIcon = <i class='fa fa-resistance'>meow</i>};
+    if (this.props.command.commandType === "read") { var fontAwesomeIcon = <i key={this.props.command.commandName + 'fa'} className='fa fa-book'></i>};
+    if (this.props.command.commandType === "play") { var fontAwesomeIcon = <i key={this.props.command.commandName + 'fa'} className='fa fa-soccer-ball-o'></i>};
+    if (this.props.command.commandType === "science") { var fontAwesomeIcon = <i key={this.props.command.commandName + 'fa'} className='fa fa-medkit'></i>};
+    if (this.props.command.commandType === "america") { var fontAwesomeIcon = <i key={this.props.command.commandName + 'fa'} className='fa fa-resistance'></i>};
 
-    // var fontAwesomeIconn = <span data-toggle="popover" data-placement="right" title={this.getCommandName()} data-content={toolTip} html="true"> {fontAwesomeIcon} </span>;
-    //
-    return fontAwesomeIcon;
+    var fontAwesomeSpan = <span key={this.props.command.commandName} className='command-component icon'> {fontAwesomeIcon} </span>
+
+    return fontAwesomeSpan;
   },
 
+
   assignPopover: function() {
-    var fontAwesomeIcon = this.getFontAwesomeFromCommandType();
+    var fontAwesomeSpan = this.getFontAwesomeFromCommandType();
     var popoverContent = this.getPopoverContent();
     var commandName = this.props.command.commandName;
 
     return (
-      <OverlayTrigger trigger="click" placement="right" overlay={<Popover id={commandName} title={commandName}>{popoverContent}</Popover>}>
-        {fontAwesomeIcon}
+      <OverlayTrigger trigger="click" placement="right" key={commandName + 'overlay'} overlay={<Popover id={commandName} title={commandName} key={commandName} >{popoverContent}</Popover>}>
+        {fontAwesomeSpan}
       </OverlayTrigger>
     )
   },
 
-  // **ON CLICK OF ABOVE-SIX-LENGTH, SET ABOVE-SIX CLASS TO DISPLAY**
-
 
   render: function() {
     return (
-      <section>
-        <span class='command-time-span'> {this.getTimeStamp()} </span>
+      <section className='command'>
+        <span className='command-component time' key={this.props.command.commandName + 'time'} > {this.getTimeStamp()} </span>
         {this.assignPopover()}
       </section>
-      // <section>
-      // <span class='command-time-span'> time stamp </span>
-        // <OverlayTrigger>
-        // <i class='fa fa-book'> fontAwesomeIcon </i>
-        //     title = porps.commandname
-        //     content =
-        //         <p> teacher name </p>
-        //         <section>
-        //             student names below six
-        //             <p> above six </p>
-        //             <p> above six names </p>
-        //         </section>
-        // </OverlayTrigger>
-      // </section>
     )
   }
 });
 
 
 var Session = React.createClass({
+
 
   render: function() {
     var sessionTimes = {
@@ -363,7 +150,6 @@ var Session = React.createClass({
       },
     ];
 
-
     var students = [
       {"name": "Billy", "id": 1},
       {"name": "Sally", "id": 2},
@@ -389,10 +175,32 @@ var Session = React.createClass({
       teachers
     };
 
+    var sessionStartComponent = (
+      <section className='command' key={sessionTimes.startTime + 'start'}>
+        <span className='command-component time' key={sessionTimes.startTime + 'starttime'}> {sessionTimes.startTime} </span>
+        <span className='command-component icon start-icon' key={sessionTimes.startTime + 'starticon'}></span>
+      </section>
+    );
+
+    var sessionEndComponent = (
+      <section className='command' key={sessionTimes.endTime + 'end'}>
+        <span className='command-component time' key={sessionTimes.endTime + 'endtime'}> {sessionTimes.endTime} </span>
+        <span className='command-component icon end-icon' key={sessionTimes.endTime + 'endicon'}></span>
+      </section>
+    );
+
+    var commandComponents = [];
+    _(sessionData.commands).forEach(function(cmd) {
+      commandComponents.unshift(<section className='buffer' key={cmd.commandName + 'buffer'}></section>)
+      commandComponents.unshift(<Command command={cmd} students={sessionData.students} teachers={sessionData.teachers} key={cmd.commandName}/>);
+    });
 
     return (
       <div>
-        <Command command={sessionData.commands[0]} students={sessionData.students} teachers={sessionData.teachers}/>
+        {sessionEndComponent}
+        <section className='buffer' key={'endbuffer'}></section>
+        {commandComponents}
+        {sessionStartComponent}
       </div>
     )
   }
@@ -401,9 +209,5 @@ var Session = React.createClass({
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
-// ReactDOM.render(
-//   <Session />,
-//   document.getElementById('session-1')
-// )
 
 module.exports = Session;

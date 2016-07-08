@@ -1,3 +1,12 @@
+The goal of these exercises were primarily for deepening my knowledge of the React framework, as well as to get a firm grasp on Webpack and all of its intricacies.
+
+##### TODO:
+In command-timeline:
+- create a form for submitting commands
+- create a form for beginning new sessions
+- create a dropdown list of font-awesome icons inside the forms using FA's CDN
+
+
 #Notes on workflow
 
 For use in production mode:
@@ -5,10 +14,15 @@ Go to webpack configuration and set the module.exports entry item to the folder 
 
 module.exports = {
   entry: [
-    './apps/**FOLDER_NAME**/index.js'
+    './apps/**APP_NAME**/index.js'
   ],
 ...
 }
+
+var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: dirname + '/apps/**APP_NAME**/index.html',
+  ...
+})
 
 ### Setup
 
@@ -43,8 +57,6 @@ and now I have a functioning React page saying Hello World!
 
 ##### Set up my first React Router framework
 
-##### TODO:
-get the (and X more) item to be clickable
 
 #####
 
