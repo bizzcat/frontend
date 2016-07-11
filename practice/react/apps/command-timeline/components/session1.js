@@ -104,6 +104,11 @@ var Command = React.createClass({
       <section className='command'>
         <span className='command-component time' key={this.props.command.commandName + 'time'} > {this.getTimeStamp()} </span>
         {this.assignPopover()}
+        // <Icon
+        //   name='fontawesome|facebook-square'
+        //   size={70}
+        //   color='#3b5998'
+        //   style={styles.facebook} />
       </section>
     )
   }

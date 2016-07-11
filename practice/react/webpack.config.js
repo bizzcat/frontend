@@ -1,13 +1,13 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/apps/command-timeline/index.html',
+  template: __dirname + '/apps/github-battle/index.html',
   filename: 'index.html',
   inject: 'body',
 })
 
 module.exports = {
   entry: [
-    './apps/command-timeline/index.js'
+    './apps/github-battle/index.js'
   ],
   output: {
     path: __dirname + '/dist',
