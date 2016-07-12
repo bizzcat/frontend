@@ -5,6 +5,8 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
+
+// GITHUB-BATTLE
 var Main = require('../components/Main');
 var Home = require('../components/Home');
 var PromptContainer = require('../containers/prompt-container');
