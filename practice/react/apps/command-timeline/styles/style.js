@@ -1,16 +1,47 @@
 
 var styles = {
   session: {
-    padding: 5%;
-    width: 75%;
-    margin: 12.5%;
-    background-color: rgba(0,0,0,0.15);
-    border-radius: '3em';
+    padding: '5%',
+    width: '75''%,'
+    margin: '12.5%',
+    background-color: 'rgba(0,0,0,0.15)',
+    border-radius: '3em',
+  },
+  command: {
+    display: 'flex',
+    text-align: 'center',
+  },
+  commandcomponent: {
+    display: 'flex',
+    justify-content: 'center',
+    align-items: 'center',
+    width: '3em',
+    height: '3em',
+    margin: '0em' '3em',
+  },
+  icon: {
+    margin-right: '1em',
+    border: 'solid',
+    border-radius: '3em',
+    border-color: 'white',
+    border-width: '0.24em',
+  },
+  buffer: {
+    margin: '0em' '6em',
+    height: '5em',
+    width: '7.5em',
+    border-right: '0.1em solid rgba(0,0,0,0.45)',
+  },
+  starticon: {
+    background-color: 'rgba(0,150,30,0.7)',
+  },
+  endicon: {
+    background-color: 'rgba(180,0,0,0.7)',
   }
 }
 
 module.exports = styles;
-//
+
 //
 // #session-1 {
 //   padding: 5%;
@@ -42,6 +73,8 @@ module.exports = styles;
 //   border-color: white;
 //   border-width: 0.24em;
 // }
+//
+//
 //
 //
 // /* COMMAND SECTION CONTENTS */

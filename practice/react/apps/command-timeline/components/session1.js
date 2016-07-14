@@ -6,25 +6,21 @@ var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
 var Popover = require('react-bootstrap/lib/Popover');
 // var styles = require('../styles');
 
-
 var Command = React.createClass({
 
   getTimeStamp: function() {
     return this.props.command.timeStamp;
   },
 
-
   getCommandName: function() {
     return this.props.command.commandName;
   },
-
 
   getTeacherNameFromID: function() {
     var createdByID = this.props.command.createdBy;
     var teacherObject = _.find(this.props.teachers, ['id', createdByID]);
     return teacherObject.name;
   },
-
 
   getStudentNamesFromID: function() {
     var sentToList = this.props.command.sentTo;
@@ -86,7 +82,6 @@ var Command = React.createClass({
     return fontAwesomeSpan;
   },
 
-
   assignPopover: function() {
     var fontAwesomeSpan = this.getFontAwesomeFromCommandType();
     var popoverContent = this.getPopoverContent();
@@ -98,7 +93,6 @@ var Command = React.createClass({
       </OverlayTrigger>
     )
   },
-
 
   render: function() {
     return (
@@ -112,7 +106,6 @@ var Command = React.createClass({
 
 
 var Session = React.createClass({
-
 
   render: function() {
     var sessionTimes = {
