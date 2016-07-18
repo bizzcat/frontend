@@ -4,7 +4,7 @@
 // It must have the ability to collect the end state of the form and send it
 // to the PropmptContainer component. Ideally it would also store it in some
 // sort of database that can be called upon using AJAX requests or some
-// other form of data retrieval. 
+// other form of data retrieval.
 
 
 var React = require('react');

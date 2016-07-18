@@ -4,6 +4,8 @@ var React = require('react');
 var _ = require('lodash');
 var OverlayTrigger = require('react-bootstrap/lib/OverlayTrigger');
 var Popover = require('react-bootstrap/lib/Popover');
+var PropTypes = React.PropTypes;
+
 // var styles = require('../styles');
 
 var Command = React.createClass({
@@ -61,7 +63,6 @@ var Command = React.createClass({
     return studentNamesString;
   },
 
-
   getPopoverContent: function() {
     var teacherName = <p className='teacher-name' key={this.props.command.commandName + 'teachername'}> {this.getTeacherNameFromID()} </p>
     var studentNames = <p className='student-names'key={this.props.command.commandName + 'studentnames'}> {this.getStudentNamesFromID()} </p>
@@ -69,7 +70,6 @@ var Command = React.createClass({
 
     return popoverContent;
   },
-
 
   getFontAwesomeFromCommandType: function() {
     if (this.props.command.commandType === "read") { var fontAwesomeIcon = <i key={this.props.command.commandName + 'fa'} className='fa fa-book'></i>};
@@ -190,7 +190,7 @@ var Session = React.createClass({
     });
 
     return (
-      <div>
+      <div className='session'>
         {sessionEndComponent}
         <section className='buffer' key={'endbuffer'}></section>
         {commandComponents}
@@ -205,3 +205,154 @@ $(document).ready(function(){
 });
 
 module.exports = Session;
+
+
+//
+// var CommandForm = React.createClass({
+//   onSubmitCommand: function() {
+//     return;
+//   }
+//
+//   onUpdateCommandName: function() {
+//     return;
+//   }
+//
+//   onUpdateCommandType: function() {
+//     return;
+//   }
+//
+//   onUpdateCreatedBy: function() {
+//     return;
+//   }
+//
+//   onUpdateSentTo: function() {
+//     return;
+//   }
+//
+//   render: function() {
+//     return;
+//   }
+// })
+//
+//
+//
+//
+//
+//
+// // {
+// //   "timeStamp": "9:30am",
+// //   "commandName": "Start Reading",
+// //   "commandType": "read",
+// //   "createdBy": 1,
+// //   "sentTo": [1, 2, 3, 4, 5, 6, 7, 8],
+// // },
+//
+// //<h1>{props.header}</h1>
+//
+// function Prompt(props) {
+//   return (
+//     <div className="jumbotron col-sm-6 col-sm-offset-2 text-center" style={transparentBg}>
+//       <h1>New Session</h1>
+//       <div className="col-sm-12">
+//         <form onSubmit={props.onSubmitCommand}>
+//           <div className="form-group">
+//             <input
+//               className="form-control"
+//               placeholder="Command Name"
+//               onChange={props.onUpdateCommandName}
+//               value={props.username}
+//               type="text" />
+//             <input
+//               className="form-control"
+//               placeholder="Command Type"
+//               onChange={props.onUpdateCommandType}
+//               value={props.username}
+//               type="text" />
+//             <input
+//               className="form-control"
+//               placeholder="Teacher ID"
+//               onChange={props.onUpdateCreatedBy}
+//               value={props.username}
+//               type="text" />
+//             <input
+//               className="form-control"
+//               placeholder="Student ID's"
+//               onChange={props.onUpdateSentTo}
+//               value={props.username}
+//               type="text" />
+//           </div>
+//           <div className="form-group col-sm-4 col-sm-offset-4">
+//             <button
+//               className="btn btn-block btn-success"
+//               type="submit">
+//               Continue
+//               </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   )
+// }
+//
+// Prompt.propTypes = {
+//   header: PropTypes.string.isRequired,
+//   onUpdateUser: PropTypes.func.isRequired,
+//   onSubmitUser: PropTypes.func.isRequired,
+//   username: PropTypes.string.isRequired
+// }
+//
+// module.exports = Prompt;
+//
+//
+//
+//
+// var PromptContainer = React.createClass({
+//
+//   contextTypes: {
+//     router: React.PropTypes.object.isRequired
+//   },
+//
+//   getInitialState: function() {
+//     return {
+//       username: ''
+//     }
+//   },
+//   handleUpdateUser: function(e) {
+//     this.setState({
+//       username: e.target.value
+//     })
+//   },
+//   handleSubmitUser: function(e) {
+//     e.preventDefault();
+//     var username = this.state.username;
+//     this.setState({
+//       username: ''
+//     });
+//
+//     if (this.props.routeParams.playerOne) {
+//       this.context.router.push({
+//         pathname: '/gb/battle',
+//         query: {
+//           playerOne: this.props.routeParams.playerOne,
+//           playerTwo: this.state.username,
+//         }
+//       })
+//     } else {
+//       this.context.router.push('/gb/playerTwo/' + this.state.username)
+//     }
+//   },
+//
+//   render: function() {
+//     return (
+//       <Prompt
+//         onSubmitUser={this.handleSubmitUser}
+//         onUpdateUser={this.handleUpdateUser}
+//         header={this.props.route.header}
+//         username={this.state.username}
+//       />
+//     )
+//
+//   }
+// });
+//
+// module.exports = PromptContainer;
