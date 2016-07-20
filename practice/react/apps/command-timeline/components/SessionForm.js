@@ -1,6 +1,32 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
+var ReactWidgets = require('react-widgets/lib/less/react-widgets'); //.less
+var DateTimePicker = ReactWidgets.DateTimePicker;
+
+var DualDateTimePicker = React.createClass({
+
+  getInitialState() {
+    return { value0: new Date(), value1: null };
+  },
+
+  render() {
+    var change = (name, value) => this.setState({
+      ['value' + name]: value
+    });
+
+    return (<div>
+      <DateTimePicker
+        value={this.state.value0}
+        onChange={change.bind(null, '0')}/>
+      <DateTimePicker
+        value={this.state.value1}
+        onChange={change.bind(null, '1')}/>
+      </div>)
+  }
+});
+
+
 function SessionForm(props) {
   return (
     <div className="jumbotron col-sm-6 col-sm-offset-2 text-center" style={transparentBg}>

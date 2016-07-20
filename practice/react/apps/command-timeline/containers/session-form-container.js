@@ -2,28 +2,13 @@ var React = require('react');
 var SessionForm = require('../components/SessionForm')
 
 var SessionFormContainer = React.createClass({
-  onUpdateCommandName: function() {
-    return;
-  }
 
-  onUpdateCommandType: function() {
-    return;
-  }
-
-  onUpdateCreatedBy: function() {
-    return;
-  }
-
-  onUpdateSentTo: function() {
-    return;
-  }
-
-  onSubmitCommand: function() {
+  onSubmitStart: function() {
     return;
   }
 
   render: function() {
-    return;
+    return; // RENDER THE SessionForm COMPONENT HERE
   }
 })
 
