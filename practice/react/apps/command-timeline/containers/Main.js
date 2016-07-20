@@ -4,7 +4,6 @@ var Main = React.createClass({
   render: function() {
     return (
       <div>
-        'Main!'
         {this.props.children}
       </div>
     )

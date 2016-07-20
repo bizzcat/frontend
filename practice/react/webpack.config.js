@@ -5,6 +5,15 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 })
 
+// var globalizePlugin = require( "globalize-webpack-plugin" );
+// var globalizePluginConfig = new globalizePlugin({
+//     production: ,
+//     developmentLocale: "en",
+//     supportedLocales: ["en"],
+//     output: "globalize-compiled-data-[locale].[hash].js",
+// })
+
+
 module.exports = {
   entry: [
     './meta/meta-index.js'
