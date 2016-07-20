@@ -24,8 +24,9 @@ var GBHome = require('../../apps/github-battle/components/Home');
 var GBPromptContainer = require('../../apps/github-battle/containers/prompt-container');
 
 // COMMAND-TIMELINE
-var CTSession = require('../../apps/command-timeline/components/session1');
-
+// var CTSession = require('../../apps/command-timeline/components/session1');
+var CTMain = require('../../apps/command-timeline/containers/Main')
+var CTSessionStart = require('../../apps/command-timeline/containers/session-form-container')
 
 var routes = (
   <Router history={hashHistory}>
@@ -37,7 +38,8 @@ var routes = (
       <Route path='/gb/playerTwo/:playerOne' header='Player Two' component={GBPromptContainer} />
     </Route>
 
-    <Route path='/ct' component={CTSession}>
+    <Route path='/ct' component={CTMain}>
+      <IndexRoute component={CTSessionStart} />
     </Route>
   </Router>
 );
