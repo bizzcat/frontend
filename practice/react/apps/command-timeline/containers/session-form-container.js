@@ -1,5 +1,5 @@
 var React = require('react');
-var Datetime = require('react-datetime');
+var Datetime = require('react-datetime'); // https://github.com/YouCanBookMe/react-datetime
 
 
 var SessionFormContainer = React.createClass({
@@ -8,12 +8,29 @@ var SessionFormContainer = React.createClass({
     return;
   },
 
+  renderMonth: function(props, month, year, selectedDate){
+    console.log(props);
+    console.log(year);
+    console.log(year);
+    console.log(selectedDate);
+  },
+
   render: function() {
     return(
       <div className="jumbotron col-sm-6 col-sm-offset-2 text-center">
         <h1>New Session</h1>
+        <h3>Session Start</h3>
         <div className="col-sm-12">
-          <Datetime />
+          <h5>Date</h5>
+          <Datetime
+            timeFormat={false}
+            renderMonth={this.renderMonth}
+          />
+
+          <h5>Start Time</h5>
+          <Datetime
+            dateFormat={false}
+          />
         </div>
       </div>)
   }
