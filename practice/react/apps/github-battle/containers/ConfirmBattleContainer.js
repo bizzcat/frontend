@@ -10,7 +10,7 @@ var ConfirmBattleContainer = React.createClass({
   getInitialState: function() {
     console.log('getInitialState')
     return {
-      isLoading: false,
+      isLoading: true,
       playerInfo: []
     }
   },
@@ -21,7 +21,12 @@ var ConfirmBattleContainer = React.createClass({
     console.log('componentDidMount')
     var query = this.props.location.query;
     githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
-    // fetch info from github and update the state
+      .then(function (players) {
+        this.setState({
+          isLoading: false,
+          playersInfo: [players[0], players[1]]
+        })
+      }.bind(this))
   },
   componentWillReceiveProps: function() {
     console.log('componentWillReceiveProps')
