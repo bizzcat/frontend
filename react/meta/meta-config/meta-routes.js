@@ -23,6 +23,7 @@ var GBMain = require('../../apps/github-battle/components/Main');
 var GBHome = require('../../apps/github-battle/components/Home');
 var GBPromptContainer = require('../../apps/github-battle/containers/PromptContainer');
 var GBConfirmBattleContainer = require('../../apps/github-battle/containers/ConfirmBattleContainer');
+var GBResultsContainer = require('../../apps/github-battle/containers/ResultsContainer');
 
 // COMMAND-TIMELINE
 // var CTSession = require('../../apps/command-timeline/components/session1');
@@ -38,6 +39,7 @@ var routes = (
       <Route path='/gb/playerOne' header='Player One' component={GBPromptContainer} />
       <Route path='/gb/playerTwo/:playerOne' header='Player Two' component={GBPromptContainer} />
       <Route path='/gb/battle' component={GBConfirmBattleContainer} />
+      <Route path='/gb/results' component={GBResultsContainer} />
     </Route>
 
     <Route path='/ct' component={CTMain}>
